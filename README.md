@@ -59,7 +59,7 @@ You can also use `method = "naive"` when sample variances are unavailable.
 
 ## 📈 Reproducing Simulation Studies
 
-This repository includes the simulation code used in the manuscript. It evaluates estimation accuracy and CI coverage under various: True $\mu_1$ and $sigma_1$ values, Mixing proportions $\pi_i$, Number of studies (k) and Sample size ranges.
+This repository includes the simulation code used in the manuscript. It evaluates estimation accuracy and CI coverage under various: True $\mu_1$ and $\sigma_1$ values, Mixing proportions $\pi_i$, Number of studies (k) and Sample size ranges.
 
 ### Simulation Workflow Overview
 | File            | Purpose                                                                  |
