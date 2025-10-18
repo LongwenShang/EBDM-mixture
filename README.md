@@ -16,7 +16,7 @@ In many applied research settings such as clinical trial simulations, multi-coho
 This creates a challenge when the underlying population is heterogeneous, such as when the outcome follows a two-group Gaussian mixture model stratified by a binary class label (e.g., treatment vs. control, male vs. female). Without access to individual labels or group-specific measurements, estimating the component-wise means and variances becomes statistically non-trivial.
 
 The `est_mixture()` function in the `ebdm` package provides a **likelihood-based** and **GMM-based** solution for this problem, enabling the estimation of:
-- Mean and variance for each latent component ($mu_1, mu_0, sigma_1, sigm_0$)
+- Mean and variance for each latent component ($\mu_1, \mu_0, \sigma_1, \sigm_0$)
 - Standard errors and confidence intervals for all parameters
 
 By leveraging summary-level inputs from multiple independent studies, this method supports realistic mixture recovery in scenarios where data privacy, logistical constraints, or historical aggregation prevent access to full data.
@@ -40,23 +40,20 @@ install.packages("ebdm")
 library(ebdm)
 
 # Load continuous example data
-data(cont_example)
+data(mixture_example)
 
-# Estimate correlation and other parameters with proposed MLE + likelihood ratio CI
-result <- cor_cont(
-  n     = cont_example$Sample_Size,
-  xbar  = cont_example$Mean_X,
-  ybar  = cont_example$Mean_Y,
-  s2x   = cont_example$Variance_X,
-  s2y   = cont_example$Variance_Y,
-  method = "proposed",
-  ci_method = "lr"
+# Estimate using GMM (recommended) with full summary statistics
+result <- est_mixture(
+  ni = mixture_example$ni,
+  xbar = mixture_example$xbar,
+  s2 = mixture_example$s2,
+  mi = mixture_example$mi
 )
 
 print(result)
 ```
 
-You can also use `method = "weighted"` when sample variances are unavailable.
+You can also use `method = "naive"` when sample variances are unavailable.
 
 ---
 
